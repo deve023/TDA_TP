@@ -1,0 +1,25 @@
+library IEEE;
+use IEEE.std_logic_1164.all;
+
+entity TB_FF_D is
+end;
+
+architecture Test of TB_FF_D is
+
+signal D, clk, rst, Q: std_logic:='0';
+
+component FF_D is
+	port(
+        D: in std_logic;
+		clk: in std_logic;
+		rst: in std_logic;
+		Q: out std_logic);
+	end component;
+
+begin
+	DUT: FF_D port map (D, clk, rst, Q);
+	
+    clk <= not clk after 10 ns;
+	rst <= '0','1' after 15 ns,'0' after 45 ns, '1' after 215 ns, '0' after 235 ns;
+	D <= '1' after 45 ns, '0' after 65 ns, '1' after 105 ns, '0' after 125 ns,'1' after 205 ns, '0' after 285 ns;
+end;
